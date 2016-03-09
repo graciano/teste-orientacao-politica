@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="author" content="Matheus Graciano <graciano.dev@gmail.com>">
+    <meta name="description" content="Teste para descobrir sua orientação política. Tirado do Piauí Herald e informatizado.">
+    <title>Teste de Orientação Política | Adaptado do Piauí Herald</title>
+    <link href="build/css/main.min.css" rel="stylesheet"/>
+<body>
+    <h1>Teste de Orientação Política</h1>
+    <h2>Descubra se você é de esquerda, de direita, ou muito pelo contrário ;)</h2>
+
+    <div id="test-container">
+
+    </div>
+    <footer id="main-footer">
+
+    </footer>
+    <script id="template-form" type="text/x-handlebars-template">
+        <form action="" method="GET" id="form-test">
+            <ol>{{#each questions }}
+                <li>
+                    <span>{{ text }}</span>
+                    <br>
+                    <ul>{{#each answers}}
+                        <li>
+                            <label><input type="radio" name="{{id}}" value="{{addTo}}" required> {{text}}</label>
+                        </li>
+
+                    {{/each}}</ul>
+                </li>
+            {{/each}}</ol>
+
+            <br>
+            <br>
+            <button type="submit">Ver Resultado</button>
+        </form>
+    </script>
+    <script id="template-footer" type="text/x-handlebars-template">
+            <span>Desenvolvido por <a href="http://graciano.tk">Matheus Graciano</a></span>
+            |
+            <span>Teste adaptado do <a href="{{source}}">Piauí Herald</a></span>
+            |
+            <span>O código é <a href="http://github.com/graciano/teste-orientacao-politica">open source</a></span>
+    </script>
+
+    <script id="template-result" type="text/x-handlebars-template">
+        <h2>{{title}}</h2>
+        <p>{{text}}</p>
+    </script>
+    <script src="build/js/main.min.js"></script>
+</body>
+</html>
