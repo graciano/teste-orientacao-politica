@@ -28,9 +28,6 @@ module.exports = function(){
                 testResult = thisResult;
         }
 
-
-        console.log(testResult);
-
         ev.preventDefault();
         return false;
     });
