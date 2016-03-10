@@ -21,7 +21,10 @@ var paths = {
 };
 paths.scripts = {
     buildPath: paths.buildPath+"js",
-    srcFiles: './js/**/*.js',
+    srcFiles: [
+        './js/**/*.js',
+        './bower_components/zepto/zepto.min.js'
+    ],
     destFile: "main.min.js"
 };
 paths.styles = {
@@ -74,7 +77,7 @@ gulp.task('styles', ['clear-css', 'sass-compile-and-merge'], function(){
 
 gulp.task('watch', function(){
     gulp.watch('sass/**/*.scss', ['styles']);
-    gulp.watch('**/*.js', ['scripts']);
+    gulp.watch(['**/*.js', '!build/**/*'], ['scripts']);
 });
 
 gulp.task('clear-js', function() {
