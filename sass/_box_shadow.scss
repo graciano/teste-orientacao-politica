@@ -1,0 +1,7 @@
+@mixin box_shadow(){
+  box-shadow: 1px 1px 3px 1px lighten(#000, 60%);
+  margin: 1em;
+  box-sizing: border-box;
+  padding: .3em;
+  border-radius: 2px;
+}

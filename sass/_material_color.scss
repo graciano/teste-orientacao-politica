@@ -1,0 +1,11 @@
+@import "vars";
+
+@mixin material_bgcolor($number){
+  background-color: map-get($colors, $number);
+  color: if($number < 500, #000, #FFF);
+}
+
+@mixin material_color($number){
+  background-color: if($number < 500, #000, #FFF);
+  color: map-get($colors, $number);
+}

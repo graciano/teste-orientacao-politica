@@ -1,5 +1,101 @@
-@import "../node_modules/normalize.css/normalize.css";
+@import "../node_modules/normalize.css/normalize";
+@import "vars";
+@import "font_face";
+@import "material_color";
+@import "box_shadow";
 
-*{
-  font-family: 'Georgia', 'Times', 'Times New Roman', serif;
+html, body{
+  font-family: 'eb_garamond12_regular', 'Times New Roman', serif;
+  font-size: 22px;
+}
+
+body{
+  box-sizing: border-box;
+  padding: 1em;
+}
+
+ol.questions {
+  counter-reset: item;
+}
+
+.questions > li{
+  @include box_shadow();
+  h3{
+    display: inline-block;
+  }
+}
+
+ol.questions > li::before {
+  @include box_shadow();
+  display: inline-block;
+  content: counter(item, upper-roman) " ";
+  counter-increment: item;
+  box-sizing: border-box;
+  padding-left: 1em;
+  $width: 4em;
+  width: $width;
+  margin-left: -$width;
+  @include material_bgcolor(900);
+  font-weight: bold;
+}
+
+#foo:checked::before,
+input[type="radio"] {
+  position:absolute;
+  clip: rect(0,0,0,0);
+  clip: rect(0 0 0 0);
+}
+
+#foo:checked,
+input[type="radio"] + label:before {
+  content: ' ';
+  display: inline-block;
+  height: 1em;
+  padding-left: .5em;
+  vertical-align: -0.25em;
+  margin-right: 0.75em;
+  transition: 0.8s ease all;
+}
+
+input[type="radio"]:checked + label:before {
+  content: '✔';
+}
+
+input[type="radio"]:checked + label,
+input[type="radio"]:checked + label:hover {
+  @include material_bgcolor(500);
+}
+
+ul.answers{
+  list-style: none;
+}
+
+ul.answers > li label {
+  padding-right: 1em;
+}
+ul.answers > li label:hover, ul.answers > li label:focus {
+  @include material_bgcolor(300);
+}
+
+button.submit-test {
+  width: 20em;
+  text-align: center;
+  margin: auto;
+  @include material_bgcolor(500);
+  @include box_shadow();
+  border: map-get($colors, 500);
+}
+
+footer#main-footer{
+  margin-top: 1em;
+  text-align: center;
+}
+
+section.result {
+  @include box_shadow();
+  @include material_bgcolor(100);
+  width: 70%;
+  margin: auto;
+  box-sizing: border-box;
+  padding: 1em;
 }

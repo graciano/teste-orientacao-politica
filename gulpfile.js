@@ -29,7 +29,7 @@ paths.styles = {
     destFile: "main.min.css"
 };
 
-gulp.task('scripts', ['clear-js'], function() {
+gulp.task('scripts', function() {
     return gulp.src(paths.scripts.srcFiles)
         .pipe(concat(paths.scripts.destFile))
         .pipe(browserify({
@@ -48,12 +48,13 @@ gulp.task('scripts', ['clear-js'], function() {
         }));
 });
 
-gulp.task('styles', ['clear-css'], function(){
+gulp.task('styles', function(){
     return gulp.src(paths.styles.srcFiles)
                 .pipe(sass({errLogToConsole: true}))
+                .on('error', swallowError)
                 .pipe(cssnano())
                 .on('error', swallowError)
-                .pipe(gulp.dest(paths.styles.destFile))
+                .pipe(gulp.dest(paths.styles.buildPath))
                 .pipe(notify({
                     title: 'Styles',
                     message: 'sass compiled o/\nat '+showTime()
@@ -63,19 +64,6 @@ gulp.task('styles', ['clear-css'], function(){
 gulp.task('watch', function(){
     gulp.watch('sass/**/*.scss', ['styles']);
     gulp.watch(['**/*.js', '!build/**/*'], ['scripts']);
-});
-
-gulp.task('clear-js', function() {
-    return del(['build/js']);
-});
-
-gulp.task('clear-css', function() {
-    return del(['build/css', 'build/sass-compiled']);
-});
-
-gulp.task('clear', function(){
-   gulp.start('clear-js');
-   gulp.start('clear-sass');
 });
 
 gulp.task('default', function() {
