@@ -6,7 +6,6 @@ var gulp = require('gulp'),
     browserify = require('gulp-browserify'),
     notify = require('gulp-notify'),
     cssnano = require('gulp-cssnano'),
-    merge = require('merge-stream'),
     gutil = require('gulp-util'),
     sass = require('gulp-sass'),
     argv = require('yargs').argv;
@@ -21,18 +20,13 @@ var paths = {
 };
 paths.scripts = {
     buildPath: paths.buildPath+"js",
-    srcFiles: [
-        './js/**/*.js',
-        './bower_components/zepto/zepto.min.js'
-    ],
+    srcFiles: './js/**/*.js',
     destFile: "main.min.js"
 };
 paths.styles = {
     buildPath: paths.buildPath+"css",
     srcFiles: './sass/**/*.scss',
-    destFile: "main.min.css",
-    vendorCss: "./node_modules/normalize.css/normalize.css",
-    destTempDir: paths.buildPath+"sass-compiled-temp"
+    destFile: "main.min.css"
 };
 
 gulp.task('scripts', ['clear-js'], function() {
@@ -54,25 +48,16 @@ gulp.task('scripts', ['clear-js'], function() {
         }));
 });
 
-gulp.task('sass-compile-and-merge', function(){
-    var streamCompileSass = gulp.src(paths.styles.srcFiles)
-        .pipe(sass({errLogToConsole: true}))
-        .on('error', swallowError)
-        .pipe(gulp.dest(paths.styles.destTempDir));
-    var streamConcatCss = gulp.src(paths.styles.destTempDir);
-    var streamVendorCss = gulp.src(paths.styles.vendorCss);
-    return merge(streamCompileSass, streamConcatCss, streamVendorCss)
-        .pipe(concat(paths.styles.destFile))
-        .pipe(cssnano())
-        .pipe(gulp.dest(paths.styles.buildPath))
-        .pipe(notify({
-            title: 'Styles',
-            message: 'sass compiled o/\nat '+showTime()
-        }));
-});
-
-gulp.task('styles', ['clear-css', 'sass-compile-and-merge'], function(){
-    return del([paths.styles.destTempDir]);
+gulp.task('styles', ['clear-css'], function(){
+    return gulp.src(paths.styles.srcFiles)
+                .pipe(sass({errLogToConsole: true}))
+                .pipe(cssnano())
+                .on('error', swallowError)
+                .pipe(gulp.dest(paths.styles.destFile))
+                .pipe(notify({
+                    title: 'Styles',
+                    message: 'sass compiled o/\nat '+showTime()
+                }));
 });
 
 gulp.task('watch', function(){
