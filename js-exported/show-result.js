@@ -49,7 +49,7 @@ module.exports = function(){
             var compiled_template = Handlebars.compile(template);
             test_container.innerHTML = compiled_template(testResult);
             //calling facebook share function
-            shareFacebook(testResult.title+"\n"+testResult.text);
+            shareFacebook(testResult.title, testResult.text);
             $(this).fadeIn(300);
         });
 
