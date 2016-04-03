@@ -3,19 +3,34 @@
 @import "font_face";
 @import "material_color";
 @import "box_shadow";
+@import "../bower_components/gess/src/gess";
 
 html, body{
   font-family: 'eb_garamond12_regular', 'Times New Roman', serif;
-  font-size: 22px;
+  @media #{media_query('big')}{
+    font-size: 22px;
+  }
 }
 
 body{
   box-sizing: border-box;
-  padding: 1em;
+  @media #{media_query('big')} {
+    padding: 1em;
+  }
+  @media not all and #{media_query('big')} {
+    padding: 0;
+    h1,h2{
+      padding: .5em;
+    }
+  }
 }
 
 ol.questions {
   counter-reset: item;
+  @media not all and #{media_query('big')} {
+    padding: 0;
+    margin: 0;
+  }
 }
 
 .questions > li{
@@ -35,6 +50,12 @@ ol.questions > li::before {
   $width: 4em;
   width: $width;
   margin-left: -$width;
+  @media not all and #{media_query('big')} {
+    width: 1+$width;
+    margin-left: 1-$width;
+    text-align: right;
+    padding-left: 1.5em;
+  }
   @include material_bgcolor(900);
   font-weight: bold;
 }
@@ -63,7 +84,7 @@ input[type="radio"] + label:before {
 
 input[type="radio"]:checked + label:before {
   content: '✔';
-  vertical-align: middle;
+  vertical-align: top;
   @extend %checksymbol;
 }
 
@@ -75,10 +96,18 @@ input[type="radio"]:checked + label:hover {
 
 ul.answers{
   list-style: none;
+  @media not all and #{media_query('big')} {
+    padding: 0;
+  }
 }
 
 ul.answers > li label {
   padding-right: 1em;
+  @media not all and #{media_query('big')} {
+    padding: 0;
+    font-size: 15px;
+    line-height: 2em;
+  }
 }
 ul.answers > li label:hover, ul.answers > li label:focus {
   @include material_bgcolor(300);
@@ -108,7 +137,9 @@ footer#main-footer{
 section.result {
   @include box_shadow();
   @include material_bgcolor(100);
-  width: 70%;
+  @media #{media_query('big')}{
+    width: 70%;
+  }
   margin: auto;
   box-sizing: border-box;
   padding: 1em;

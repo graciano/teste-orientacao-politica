@@ -1,0 +1,22 @@
+{
+  "name": "teste-orientacao-politica",
+  "description": "Teste para descobrir sua orientação política. Tirado do Piauí Herald e informatizado.",
+  "main": "index.js",
+  "authors": [
+    "Matheus Graciano <graciano.dev@gmail.com>"
+  ],
+  "license": "MIT",
+  "homepage": "https://github.com/graciano/teste-orientacao-politica",
+  "moduleType": [],
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "devDependencies": {
+    "gess": "^1.0.0"
+  }
+}
