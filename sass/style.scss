@@ -94,6 +94,12 @@ button.submit-test {
   border: map-get($colors, 500);
 }
 
+button#button-share-facebook{
+  @include material_bgcolor(500);
+  @include box_shadow();
+  border: map-get($colors, 500);
+}
+
 footer#main-footer{
   margin-top: 1em;
   text-align: center;
