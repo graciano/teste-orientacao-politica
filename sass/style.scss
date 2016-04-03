@@ -46,24 +46,31 @@ input[type="radio"] {
   clip: rect(0 0 0 0);
 }
 
-#foo:checked,
-input[type="radio"] + label:before {
-  content: ' ';
+%checksymbol {
   display: inline-block;
   height: 1em;
   padding-left: .5em;
-  vertical-align: -0.25em;
-  margin-right: 0.75em;
-  transition: 0.8s ease all;
+  margin-right: 0.5em;
+  width: 1em;
+  transition: 0.8s ease out;
+}
+
+#foo:checked,
+input[type="radio"] + label:before {
+  content: ' ';
+  @extend %checksymbol;
 }
 
 input[type="radio"]:checked + label:before {
   content: '✔';
+  vertical-align: middle;
+  @extend %checksymbol;
 }
 
 input[type="radio"]:checked + label,
 input[type="radio"]:checked + label:hover {
   @include material_bgcolor(500);
+  border-radius: 2px;
 }
 
 ul.answers{
@@ -75,6 +82,7 @@ ul.answers > li label {
 }
 ul.answers > li label:hover, ul.answers > li label:focus {
   @include material_bgcolor(300);
+  border-radius: 2px;
 }
 
 button.submit-test {
