@@ -1,6 +1,7 @@
 module.exports = function(){
     var testJSON    = require('../assets/test.json'),
         Handlebars = require('handlebars'),
+        shareFacebook = require('./share-facebook'),
         $           = require('jquery');
 
     var $form_test = $('#form-test');
@@ -47,6 +48,8 @@ module.exports = function(){
             var template = document.getElementById('template-result').innerHTML;
             var compiled_template = Handlebars.compile(template);
             test_container.innerHTML = compiled_template(testResult);
+            //calling facebook share function
+            shareFacebook(testResult.title+"\n"+testResult.text);
             $(this).fadeIn(300);
         });
 
